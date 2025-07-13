@@ -52,3 +52,5 @@ firebase.json
 .env.*
 google-services.json
 ios/Runner/GoogleService-Info.plist
+
+todo.md
