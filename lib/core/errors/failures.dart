@@ -16,9 +16,6 @@ class AuthFailure extends AppFailure {
   const AuthFailure(super.message, [super.stackTrace]);
 }
 
-class FirestoreFailure extends AppFailure {
-  const FirestoreFailure(super.message, [super.stackTrace]);
-}
 
 class FunctionFailure extends AppFailure {
   const FunctionFailure(super.message, [super.stackTrace]);
