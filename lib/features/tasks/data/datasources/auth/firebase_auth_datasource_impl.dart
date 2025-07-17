@@ -48,7 +48,7 @@ class FirebaseAuthDatasourceImpl extends RemoteAuthDataSource {
   }
 
   @override
-  Future<app.User> signInAnonymous() async {
+  Future<app.User> signInWithAnonymous() async {
     try {
       final userCredential = await auth.signInAnonymously();
       return UserModel.fromUserCredential(userCredential);
@@ -98,7 +98,7 @@ class FirebaseAuthDatasourceImpl extends RemoteAuthDataSource {
 
       if (googleUser == null) {
         //TODO hanlde error when user cancels flow
-        throw UnimplementedError();
+        throw AuthFailure("El usuario canceló el flujo de autenticación con google");
       }
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
