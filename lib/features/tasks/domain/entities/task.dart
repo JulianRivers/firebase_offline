@@ -4,7 +4,7 @@ class Task {
   final int priority;
   final bool done;
   final DateTime createdAt;
-  final DateTime updateAt;
+  final DateTime updatedAt;
 
   const Task({
     required this.id,
@@ -12,6 +12,6 @@ class Task {
     this.priority = 0,
     required this.done,
     required this.createdAt,
-    required this.updateAt,
+    required this.updatedAt,
   });
 }

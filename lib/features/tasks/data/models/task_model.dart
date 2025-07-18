@@ -1,4 +1,4 @@
-import 'package:firebase_offline/features/tasks/domain/entities/Task.dart';
+import 'package:firebase_offline/features/tasks/domain/entities/task.dart';
 
 class TaskModel extends Task {
   TaskModel({
@@ -6,7 +6,7 @@ class TaskModel extends Task {
     required super.task,
     required super.done,
     required super.createdAt,
-    required super.updateAt,
+    required super.updatedAt,
     super.priority = 0,
   });
 
@@ -17,7 +17,7 @@ class TaskModel extends Task {
       done: json['done'],
       priority: json['priority'],
       createdAt: json['createdAt'].toIso8601String(),
-      updateAt: json['updateAt'].toIso8601String(),
+      updatedAt: json['updatedAt'].toIso8601String(),
     );
   }
 
@@ -28,7 +28,7 @@ class TaskModel extends Task {
       "done": done,
       "priority": priority,
       "createdAt": createdAt,
-      "updateAt": updateAt,
+      "updateAt": updatedAt,
     };
   }
 
@@ -39,7 +39,25 @@ class TaskModel extends Task {
       done: task.done,
       priority: task.priority,
       createdAt: task.createdAt,
-      updateAt: task.updateAt,
+      updatedAt: task.updatedAt,
+    );
+  }
+
+  TaskModel copyWith({
+    String? id,
+    String? task,
+    bool? done,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? priority,
+  }) {
+    return TaskModel(
+      id: id ?? this.id,
+      task: task ?? this.task,
+      done: done ?? this.done,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      priority: priority ?? this.priority,
     );
   }
 }
