@@ -3,10 +3,11 @@ import 'package:firebase_offline/core/errors/failures.dart';
 import 'package:firebase_offline/features/tasks/data/datasources/auth/remote_auth_datasources.dart';
 import 'package:firebase_offline/features/tasks/domain/entities/user.dart';
 import 'package:firebase_offline/features/tasks/domain/repositories/users_repository.dart';
-import 'package:dartz/dartz.dart';
 
 class UsersRepositoryImpl extends UsersRepository {
-  late RemoteAuthDataSource remoteAuthDataSource;
+  final RemoteAuthDataSource remoteAuthDataSource;
+
+  UsersRepositoryImpl({required this.remoteAuthDataSource});
 
   @override
   Future<Either<AppFailure, User>> createUserWithEmailAndPassword(

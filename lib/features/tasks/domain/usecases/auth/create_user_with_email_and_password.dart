@@ -7,9 +7,6 @@ class CreateUserWithEmailAndPasswordUseCase {
 
   CreateUserWithEmailAndPasswordUseCase({required this.repository});
 
-
-
-
   Future<Either<AppFailure, void>> call(String email, String password) {
     return repository.createUserWithEmailAndPassword(email, password);
   }
