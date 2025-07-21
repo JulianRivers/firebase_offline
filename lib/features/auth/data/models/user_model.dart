@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:firebase_offline/features/tasks/domain/entities/user.dart';
+import 'package:firebase_offline/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({super.email, super.id, super.createdAt, super.lastLogin});

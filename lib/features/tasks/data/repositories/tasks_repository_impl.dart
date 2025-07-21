@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart' hide Task;
 import 'package:firebase_offline/core/errors/failures.dart';
-import 'package:firebase_offline/features/tasks/data/datasources/tasks/tasks_datasources.dart';
+import 'package:firebase_offline/features/tasks/data/datasources/tasks_datasources.dart';
 import 'package:firebase_offline/features/tasks/domain/entities/task.dart';
 import 'package:firebase_offline/features/tasks/domain/repositories/tasks_repository.dart';
 

@@ -1,5 +1,5 @@
 import 'package:firebase_offline/core/errors/failures.dart';
-import 'package:firebase_offline/features/tasks/data/datasources/tasks/tasks_datasources.dart';
+import 'package:firebase_offline/features/tasks/data/datasources/tasks_datasources.dart';
 import 'package:firebase_offline/features/tasks/data/models/task_model.dart';
 import 'package:firebase_offline/features/tasks/domain/entities/task.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

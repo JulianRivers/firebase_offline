@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_offline/core/errors/failures.dart';
-import 'package:firebase_offline/features/tasks/domain/entities/user.dart';
+import 'package:firebase_offline/features/auth/domain/entities/user.dart';
 
 abstract class UsersRepository {
   Future<Either<AppFailure, User>> createUserWithEmailAndPassword(

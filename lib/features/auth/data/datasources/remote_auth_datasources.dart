@@ -1,4 +1,5 @@
-import '../../../domain/entities/user.dart';
+
+import 'package:firebase_offline/features/auth/domain/entities/user.dart';
 
 abstract class RemoteAuthDataSource {
   Future<User> createUserWithEmailAndPassword(String email, String password);

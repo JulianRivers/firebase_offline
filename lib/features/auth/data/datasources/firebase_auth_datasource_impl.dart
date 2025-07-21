@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_offline/core/errors/failures.dart';
-import 'package:firebase_offline/features/tasks/data/datasources/auth/remote_auth_datasources.dart';
-import 'package:firebase_offline/features/tasks/data/models/user_model.dart';
-import 'package:firebase_offline/features/tasks/domain/entities/user.dart'
+import 'package:firebase_offline/features/auth/data/datasources/remote_auth_datasources.dart';
+import 'package:firebase_offline/features/auth/data/models/user_model.dart';
+import 'package:firebase_offline/features/auth/domain/entities/user.dart'
     as app;
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -98,7 +98,9 @@ class FirebaseAuthDatasourceImpl extends RemoteAuthDataSource {
 
       if (googleUser == null) {
         //TODO hanlde error when user cancels flow
-        throw AuthFailure("El usuario canceló el flujo de autenticación con google");
+        throw AuthFailure(
+          "El usuario canceló el flujo de autenticación con google",
+        );
       }
       final GoogleSignInAuthentication googleAuth = googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
