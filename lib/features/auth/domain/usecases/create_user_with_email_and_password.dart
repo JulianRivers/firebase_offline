@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_offline/core/errors/failures.dart';
+import 'package:firebase_offline/features/auth/domain/entities/user.dart';
 import 'package:firebase_offline/features/auth/domain/repositories/users_repository.dart';
 
 class CreateUserWithEmailAndPasswordUseCase {
@@ -7,7 +8,7 @@ class CreateUserWithEmailAndPasswordUseCase {
 
   CreateUserWithEmailAndPasswordUseCase({required this.repository});
 
-  Future<Either<AppFailure, void>> call(String email, String password) {
+  Future<Either<AppFailure, User>> call(String email, String password) {
     return repository.createUserWithEmailAndPassword(email, password);
   }
 }
