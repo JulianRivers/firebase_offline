@@ -1,4 +1,6 @@
 import 'package:firebase_offline/core/navigation/app_routes.dart';
+import 'package:firebase_offline/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:firebase_offline/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,12 +15,25 @@ class AppRoutingConfig {
     initialLocation: AppRoutes.root,
     // redirect: NavigationGuard.authGuard,
     routes: [
-      GoRoute(path: AppRoutes.login, name: 'login'),
-      GoRoute(path: AppRoutes.register, name: 'register'),
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        routes: [GoRoute(path: AppRoutes.home, name: 'home')],
+      GoRoute(
+        path: AppRoutes.root,
+        name: '/',
+        builder: (context, state) => SignUpPage(),
       ),
+      GoRoute(
+        path: AppRoutes.login,
+        name: 'login',
+        builder: (context, state) => SignInPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.register,
+        name: 'register',
+        builder: (context, state) => SignUpPage(),
+      ),
+      // ShellRoute(
+      //   navigatorKey: _shellNavigatorKey,
+      //   routes: [GoRoute(path: AppRoutes.home, name: 'home')],
+      // ),
     ],
   );
 }
