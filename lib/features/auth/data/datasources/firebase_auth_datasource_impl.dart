@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_offline/core/errors/failures.dart';
 import 'package:firebase_offline/features/auth/data/datasources/remote_auth_datasources.dart';
@@ -10,8 +12,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 class FirebaseAuthDatasourceImpl extends RemoteAuthDataSource {
   final FirebaseAuth auth;
   final GoogleSignIn googleSignIn;
-
-  FirebaseAuthDatasourceImpl({required this.auth, required this.googleSignIn});
+  final FirebaseFirestore db;
+  FirebaseAuthDatasourceImpl({
+    required this.auth,
+    required this.googleSignIn,
+    required this.db,
+  });
 
   @override
   Future<app.User> createUserWithEmailAndPassword(
@@ -23,7 +29,21 @@ class FirebaseAuthDatasourceImpl extends RemoteAuthDataSource {
         email: email,
         password: password,
       );
-      return UserModel.fromUserCredential(userCredential);
+      if (userCredential.user == null) {
+        throw AuthFailure('No se pudo crear el usuario.', StackTrace.current);
+      }
+      final newUser = UserModel(
+        id: userCredential.user!.uid,
+        email: email,
+        createdAt: DateTime.now(),
+        lastLogin: DateTime.now(),
+      );
+      await db
+          .collection('users')
+          .doc(userCredential.user?.uid)
+          .set(newUser.toJson());
+
+      return newUser;
     }
     //TODO handle custom errors
     on FirebaseAuthException catch (e) {
