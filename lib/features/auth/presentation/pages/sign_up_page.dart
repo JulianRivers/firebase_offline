@@ -2,6 +2,7 @@ import 'package:firebase_offline/core/navigation/app_routes.dart';
 import 'package:firebase_offline/core/widgets/custom_buttom.dart';
 import 'package:firebase_offline/core/widgets/custom_text_form_field.dart';
 import 'package:firebase_offline/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:firebase_offline/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,49 +16,43 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<AuthBloc, AuthState>(
+      body: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthFailure) {
+            var snackBar = SnackBar(content: Text(state.failure.message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          if (state is AuthSuccess) {
+            context.go('/login');
+          }
+        },
         builder: (context, state) {
-          switch (state) {
-            case AuthInitial():
-              return SafeArea(
-                minimum: const EdgeInsets.only(top: 100, right: 16, left: 16),
-                child: Form(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _signup(),
-                        const SizedBox(height: 50),
-                        _emailField(),
-                        const SizedBox(height: 20),
-                        _buildPasswordWidget(),
-                        const SizedBox(height: 20),
-                        _createUserButtom(),
-                        const SizedBox(height: 20),
-                        _buildOrWidget(),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            case AuthLoading():
-              return Center(child: CircularProgressIndicator());
-            case AuthFailure():
-              return Center(
+          if (state is AuthLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
+          return SafeArea(
+            minimum: const EdgeInsets.only(top: 100, right: 16, left: 16),
+            child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text("Ups hubo un error", style: TextStyle(fontSize: 32),),
+                    _signup(),
+                    const SizedBox(height: 50),
+                    _emailField(),
                     const SizedBox(height: 20),
-                    _goToBackButtom()
+                    _buildPasswordWidget(),
+                    const SizedBox(height: 20),
+                    _createUserButtom(),
+                    const SizedBox(height: 20),
+                    _buildOrWidget(),
                   ],
                 ),
-              );
-            case AuthSuccess():
-              return Center(child: CircularProgressIndicator());
-          }
+              ),
+            ),
+          );
         },
       ),
     );
