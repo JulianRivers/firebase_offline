@@ -27,9 +27,7 @@ class SignUpPage extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          if (state is AuthLoading) {
-            return Center(child: CircularProgressIndicator());
-          }
+         
           return SafeArea(
             minimum: const EdgeInsets.only(top: 100, right: 16, left: 16),
             child: Form(

@@ -10,7 +10,12 @@ class SignInPage extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
-          return Text("data");
+          return Center(child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("data"),
+            ],
+          ));
         },
       ),
     );
