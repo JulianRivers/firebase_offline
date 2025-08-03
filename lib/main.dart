@@ -11,7 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   serviceLocatorInit();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseFirestore.instance.settings = const Settings(
+  getIt.get<FirebaseFirestore>().settings = const Settings(
     cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
   );
   runApp(const BlocProviders());
@@ -37,6 +37,7 @@ class MainApp extends StatelessWidget {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           title: "Firebase Offline App",
           routerConfig: AppRoutingConfig.router,
         );
